@@ -1,4 +1,5 @@
 streamlit
-opencv-contrib-python
+pip install ultralytics
+pip install opencv-python-headless
 firebase-admin
 mediapipe

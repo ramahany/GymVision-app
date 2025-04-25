@@ -42,7 +42,7 @@ def get_user_data():
     return df
 
 def add_admin(username, name, password):
-    cred = credentials.Certificate('./newDB.json')
+    cred = credentials.Certificate(FIREBASE_CONFIG)
     try:
         firebase_admin.get_app()
     except ValueError as e:

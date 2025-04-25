@@ -7,36 +7,6 @@ import cv2
 import numpy as np
 
 
-st.title(f'welcome back r4m4 ')
-poses = ["front balance", "side balance"]
-pos = st.selectbox("evaluation for ...", poses, index=None, placeholder="Select pose ...")
-image = st.file_uploader("Choose an image...", type=["jpg", "png"])
-
-
-if image is not None:
-    l = run_check(image, pos)
-    if l:
-        out_img, score, feedback = l
-        test = st.image(out_img, channels='BGR')
-        st.title(f"You scored {score}/10")
-        if len(feedback) > 0:
-            for line in feedback:
-                st.write(line)
-
-
-        is_success, buffer = cv2.imencode(".png", out_img)
-        io_buf = buffer.tobytes()
-
-        # Create a download button
-        st.download_button(
-            label="Download image",
-            data=io_buf,
-            file_name="image.png",
-            mime="image/png"
-        )
-    else:
-        st.error('invalid image, please upload another image!', icon="🚨")
-
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
@@ -247,6 +217,36 @@ def run_check(img_path, pose_chosen):
 
     return out_put, score, feed_back
 
+
+st.title(f'welcome back r4m4 ')
+poses = ["front balance", "side balance"]
+pos = st.selectbox("evaluation for ...", poses, index=None, placeholder="Select pose ...")
+image = st.file_uploader("Choose an image...", type=["jpg", "png"])
+
+
+if image is not None:
+    l = run_check(image, pos)
+    if l:
+        out_img, score, feedback = l
+        test = st.image(out_img, channels='BGR')
+        st.title(f"You scored {score}/10")
+        if len(feedback) > 0:
+            for line in feedback:
+                st.write(line)
+
+
+        is_success, buffer = cv2.imencode(".png", out_img)
+        io_buf = buffer.tobytes()
+
+        # Create a download button
+        st.download_button(
+            label="Download image",
+            data=io_buf,
+            file_name="image.png",
+            mime="image/png"
+        )
+    else:
+        st.error('invalid image, please upload another image!', icon="🚨")
 
 
 

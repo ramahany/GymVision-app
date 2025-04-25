@@ -8,7 +8,7 @@ from google.cloud.firestore_v1.base_query import FieldFilter
 
 
 def check_valid_user(username_, password_):
-    cred = credentials.Certificate('./newDB.json')
+    cred = credentials.Certificate(FIREBASE_CONFIG)
     try:
         firebase_admin.get_app()
     except ValueError as e:
@@ -51,7 +51,7 @@ def sign_up(username, name, password):
     for i in poses:
         data[f'{i}_states'] = states
 
-    cred = credentials.Certificate('./newDB.json')
+    cred = credentials.Certificate(FIREBASE_CONFIG)
     try:
         firebase_admin.get_app()
     except ValueError as e:
